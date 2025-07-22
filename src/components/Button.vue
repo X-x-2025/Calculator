@@ -11,7 +11,7 @@
             <button @click="getNumber(5)">5</button>
             <button @click="getNumber(6)">6</button>
             <button class="jia type" data-type="jia">+</button>
-            <button @click="getNumber(7)">8</button>
+            <button @click="getNumber(7)">7</button>
             <button @click="getNumber(8)">8</button>
             <button @click="getNumber(9)">9</button>
             <button @click="" class="jian type" data-type="jian">-</button>
