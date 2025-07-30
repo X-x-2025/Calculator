@@ -9,6 +9,7 @@ const getNumber = (value) => {
   // const reg1 = /\+/
  let str = ''
  let sum = 0
+
  
 //  user.prev = str
 //  console.log(str);
@@ -22,7 +23,7 @@ const getNumber = (value) => {
   if (/[+\-×÷]{2}$/.test(newstr)) return
     user.prev = newstr
   }else if(value == '='){
-    user.current = sum + ' '
+    user.current = equalFn(str) + ' '
   }else{
     str = user.prev + value
     user.prev = str
@@ -30,11 +31,6 @@ const getNumber = (value) => {
   // user.prev += value
   // return user.prev
 }
-
-
-
-
-
 
 
 
@@ -51,6 +47,8 @@ const getNumber = (value) => {
 //   }
 // }
 // 归零函数
+
+
 const cleraFn = (str) => {
   str = ''
   user.prev = ''
@@ -64,7 +62,7 @@ const equalFn = (str) => {
   }else if(str.includes('-')){
     subtractFn(str)
   }else if(str.includes('×')){
-    chengFn(str)
+   return chengFn(str)
   }else if(str.includes('÷')){
     chuFn(str)
   }
@@ -100,8 +98,8 @@ const chengFn = (str) => {
     return 
   } else{
     str.replace(/(\d+)(\×)(\d+)/,($_,$1,$2,$3) => {
-      sum = $1 * $3
-      return sum
+     
+      return $1 * $3
     })
   } 
 }
@@ -117,7 +115,6 @@ const chuFn = (str) => {
     })
   } 
 }
-
 
 
 </script>
