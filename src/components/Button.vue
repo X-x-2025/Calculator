@@ -1,54 +1,31 @@
+<script setup >
+
+</script>
+
 <template>
 <div class="buttons">
-            <button class="del type" data-type="del">del</button>
-            <button class="is0 type" data-type="is0">AC</button>
-            <button class="cheng type"data-type="cheng">*</button>
-            <button @click="getNumber(1)">1</button>
-            <button @click="getNumber(2)">2</button>
-            <button @click="getNumber(3)">3</button>
-            <button class="chu type" data-type="chu">/</button>
-            <button @click="getNumber(4)">4</button>
-            <button @click="getNumber(5)">5</button>
-            <button @click="getNumber(6)">6</button>
-            <button class="jia type" data-type="jia">+</button>
-            <button @click="getNumber(7)">7</button>
-            <button @click="getNumber(8)">8</button>
-            <button @click="getNumber(9)">9</button>
-            <button @click="" class="jian type" data-type="jian">-</button>
-            <button @click="getNumber(0)">0</button>
-            <button>.</button>
-            <button class="equal"data-type="equal">=</button>
-        </div>
+    
+    <button @click="$emit('input', 'AC')" class="is0 type">AC</button>
+    <button @click="$emit('input', 'DEL')" class="del type">DEL</button>
+    <button @click="$emit('input', '÷')" class="chu type">÷</button>
+    <button @click="$emit('input', '7')">7</button>
+    <button @click="$emit('input', '8')">8</button>
+    <button @click="$emit('input', '9')">9</button>
+    <button @click="$emit('input', '×')" class="cheng type">×</button>
+    <button @click="$emit('input', '4')">4</button>
+    <button @click="$emit('input', '5')">5</button>
+    <button @click="$emit('input', '6')">6</button>
+    <button @click="$emit('input', '-')" class="jian type">-</button>
+    <button @click="$emit('input', '1')">1</button>
+    <button @click="$emit('input', '2')">2</button>
+    <button @click="$emit('input', '3')">3</button>
+    <button @click="$emit('input', '+')" class="jia type">+</button>
+    <button @click="$emit('input', '0')">0</button>
+    <button @click="$emit('input', '.')">.</button>
+    <button @click="$emit('input', '=')" class="equal">=</button>
+</div>
 </template>
 
-<script>
-export default {
-    name: 'Button',
-    data(){
-        return{
-            num:0,
-        }
-    },
-    methods:{ 
-        getNumber(numb){
-            this.num = numb;
-            console.log(this.num);
-        }
-    }
-}
-// const number = new Vue({
-//    el:'.buttons button',
-//    methods:{
-//     getNumber(numb){
-//         num =  numb
-//         console.log(num);
-        
-
-//     }
-
-//    }
-// })
-</script>
 
 <style>
 .buttons{
