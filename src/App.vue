@@ -59,7 +59,7 @@ const cleraFn = (str) => {
 const equalFn = () => {
   const expression = user.prev
   if(expression.includes('+')) {
-    return addFn()  // 需要返回计算结果
+    return addFn()  
   }else if(expression.includes('-')){
     return subtractFn()
   }else if(expression.includes('×')){
@@ -69,7 +69,7 @@ const equalFn = () => {
   }
 }
 
-// 修改所有运算函数（以加法为例）：
+// 加法函数
 const addFn = () => {
   if(user.prev == '') return ''
   return user.prev.replace(/(\d+)\+(\d+)/, (_, $1, $2) => {
@@ -77,7 +77,7 @@ const addFn = () => {
   })
 }
 
-// 其他运算符函数需要相同修改：
+// 减法函数
 const subtractFn = () => {
   if(user.prev == '') return ''
   return user.prev.replace(/(\d+)-(\d+)/, (_, $1, $2) => {
@@ -85,6 +85,7 @@ const subtractFn = () => {
   })
 }
 
+// 乘法函数
 const chengFn = () => {
   if(user.prev == '') return ''
   return user.prev.replace(/(\d+)×(\d+)/, (_, $1, $2) => {
@@ -92,6 +93,7 @@ const chengFn = () => {
   })
 }
 
+// 除法函数
 const chuFn = () => {
   if(user.prev == '') return ''
   return user.prev.replace(/(\d+)÷(\d+)/, (_, $1, $2) => {
