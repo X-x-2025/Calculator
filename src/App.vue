@@ -8,7 +8,7 @@ const getNumber = (value) => {
   // const reg = /^[0-9]/
   // const reg1 = /\+/
  let str = ''
- let sum = 0
+
 
  
 //  user.prev = str
@@ -23,7 +23,7 @@ const getNumber = (value) => {
   if (/[+\-×÷]{2}$/.test(newstr)) return
     user.prev = newstr
   }else if(value == '='){
-    user.current = equalFn(str) + ' '
+    user.current = equalFn() + ' '
   }else{
     str = user.prev + value
     user.prev = str
@@ -56,64 +56,47 @@ const cleraFn = (str) => {
 }
 
 
-const equalFn = (str) => {
-  if(str.includes('+')) {
-    addFn(str)
-  }else if(str.includes('-')){
-    subtractFn(str)
-  }else if(str.includes('×')){
-   return chengFn(str)
-  }else if(str.includes('÷')){
-    chuFn(str)
+const equalFn = () => {
+  const expression = user.prev
+  if(expression.includes('+')) {
+    return addFn()  // 需要返回计算结果
+  }else if(expression.includes('-')){
+    return subtractFn()
+  }else if(expression.includes('×')){
+   return chengFn()
+  }else if(expression.includes('÷')){
+    return chuFn()
   }
 }
 
-// 加法函数
-const addFn = (str) => {
-  if(str==''){ 
-    return 
-  } else{
-    str.replace(/(\d+)(\+)(\d+)/,($_,$1,$2,$3) => {
-      sum = $1 + $3
-      return sum
-    })
-  } 
+// 修改所有运算函数（以加法为例）：
+const addFn = () => {
+  if(user.prev == '') return ''
+  return user.prev.replace(/(\d+)\+(\d+)/, (_, $1, $2) => {
+    return Number($1) + Number($2)
+  })
 }
 
-// 减法函数
-const subtractFn = (str) => {
-  if(str==''){ 
-    return 
-  } else{
-    str.replace(/(\d+)(\-)(\d+)/,($_,$1,$2,$3) => {
-      sum = $1 - $3
-      return sum
-    })
-  } 
+// 其他运算符函数需要相同修改：
+const subtractFn = () => {
+  if(user.prev == '') return ''
+  return user.prev.replace(/(\d+)-(\d+)/, (_, $1, $2) => {
+    return Number($1) - Number($2)
+  })
 }
 
-// 乘法函数
-const chengFn = (str) => {
-  if(str==''){ 
-    return 
-  } else{
-    str.replace(/(\d+)(\×)(\d+)/,($_,$1,$2,$3) => {
-     
-      return $1 * $3
-    })
-  } 
+const chengFn = () => {
+  if(user.prev == '') return ''
+  return user.prev.replace(/(\d+)×(\d+)/, (_, $1, $2) => {
+    return Number($1) * Number($2)
+  })
 }
 
-// 除法函数
-const chuFn = (str) => {
-  if(str==''){ 
-    return 
-  } else{
-    str.replace(/(\d+)(\÷)(\d+)/,($_,$1,$2,$3) => {
-      sum = $1 / $3
-      return sum
-    })
-  } 
+const chuFn = () => {
+  if(user.prev == '') return ''
+  return user.prev.replace(/(\d+)÷(\d+)/, (_, $1, $2) => {
+    return Number($1) / Number($2)
+  })
 }
 
 
