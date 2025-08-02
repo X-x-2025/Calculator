@@ -38,7 +38,7 @@ const getNumber = (value) => {
 
 // 删除函数
 // const deleteFn = () => {
-//   if(str === ''){
+//   if(str == ''){
 //     return
 //   }else{
 // //  str = user.prev + value
@@ -46,27 +46,44 @@ const getNumber = (value) => {
 //   user.prev = user.prev.split(0,-1)
 //   }
 // }
+
+
 // 归零函数
-
-
 const cleraFn = (str) => {
   str = ''
   user.prev = ''
   user.current = ''
 }
 
-
 const equalFn = () => {
   const expression = user.prev
-  if(expression.includes('+')) {
-    return addFn()  
-  }else if(expression.includes('-')){
-    return subtractFn()
-  }else if(expression.includes('×')){
-   return chengFn()
-  }else if(expression.includes('÷')){
-    return chuFn()
-  }
+ return expression.replace(/^(\d+)([+\-×÷])(\d+)((?:[+\-×÷]\d+)*)$/g,(_,$partA,$partB,$partC,$partD) => {
+      while($partD == ''){
+           if($partB == '+'){
+                return Number($partA) + Number($partC) + $partD
+           }
+           else if($partB == '-'){
+                return Number($partA) - Number($partC) + $partD
+           } 
+           else if ($partB == '×') {
+               return Number($partA) * Number($partC) + $partD
+           }
+           else if ($partB == '÷') {
+               return Number($partA) / Number($partC) + $partD
+           }
+          }
+            })
+          
+  // 只能二元运算
+  // if(expression.includes('+')) {
+  //   return addFn()  
+  // }else if(expression.includes('-')){
+  //   return subtractFn()
+  // }else if(expression.includes('×')){ 
+  //  return chengFn()
+  // }else if(expression.includes('÷')){
+  //   return chuFn()
+  // }
 }
 
 // 加法函数
