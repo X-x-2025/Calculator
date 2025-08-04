@@ -9,8 +9,6 @@ const getNumber = (value) => {
   // const reg1 = /\+/
  let str = ''
 
-
- 
 //  user.prev = str
 //  console.log(str);
 
@@ -23,7 +21,7 @@ const getNumber = (value) => {
   if (/[+\-×÷]{2}$/.test(newstr)) return
     user.prev = newstr
   }else if(value == '='){
-    user.current = equalFn() + ' '
+    user.current = equalFn(user.prev) + ' '
   }else{
     str = user.prev + value
     user.prev = str
@@ -50,29 +48,132 @@ const getNumber = (value) => {
 
 // 归零函数
 const cleraFn = (str) => {
-  str = ''
   user.prev = ''
   user.current = ''
 }
 
-const equalFn = () => {
-  const expression = user.prev
- return expression.replace(/^(\d+)([+\-×÷])(\d+)((?:[+\-×÷]\d+)*)$/g,(_,$partA,$partB,$partC,$partD) => {
-      while($partD == ''){
-           if($partB == '+'){
-                return Number($partA) + Number($partC) + $partD
-           }
-           else if($partB == '-'){
-                return Number($partA) - Number($partC) + $partD
-           } 
-           else if ($partB == '×') {
-               return Number($partA) * Number($partC) + $partD
-           }
-           else if ($partB == '÷') {
-               return Number($partA) / Number($partC) + $partD
-           }
-          }
-            })
+const equalFn = (str1) => {
+       // 将中缀表达式装换为后缀表达式
+        // 定义运算优先级
+        const grade = {
+            '+':1,
+            '-':1,
+            '×':2,
+            '÷':2
+        }
+        const arr = str1.split('')
+        console.log(arr);
+        for(let i = 0;i < arr.length;i++){
+            // if(newarr[i].includes([0,1,2,3,4,5,6,7,8,9,'.']) && newarr[i+1].includes([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '.'])){
+            //     newarr.splice(i,1,newarr[i]+newarr[i+1])
+            //     newarr.splice(i+1,1)
+            //     // i--
+            // }
+            // console.log(newarr);
+
+           if(/[\d.]/.test(arr[i]) && /[\d.]/.test(arr[i+1])){
+                arr.splice(i,1,arr[i]+arr[i+1])
+                arr.splice(i+1,1)
+                // 继续判断索引为i的数字，再次执行循环体，判断是否有多个数字
+                i--
+            }
+            console.log(arr);
+            
+        }
+        console.log(arr);
+        const endarr = []
+        const oparr = []
+        console.log(arr);
+
+        
+        arr.map((a,index) => {
+            // 如果a是数字
+            if(/\d+/.test(a)){
+                endarr.push(a)
+            }
+            // 如果a是符号
+            else if(a in grade){
+                // 如果符号a的优先级大于栈顶符号的优先级，则入栈，栈空也入栈
+                    if(grade[a] > grade[oparr[oparr.length-1]] || oparr.length == 0){
+                        oparr.push(a)
+                        // console.log(oparr);
+                    }else{
+                        // 按顺序出栈
+                        for(let j=oparr.length-1;j>=0;j--){
+                            endarr.push(oparr[j])
+                        }
+                        // 清空栈
+                        oparr.splice(0,oparr.length)
+                        // 入栈
+                        oparr.push(a)
+                        console.log(endarr);
+            }
+        }
+         if (index === arr.length - 1) {
+                // 按顺序出栈
+                for (let q = oparr.length - 1; q >= 0; q--) {
+                    endarr.push(oparr[q])
+                }
+            }
+            console.log(endarr);
+})
+        console.log(endarr);
+        console.log(oparr);
+
+
+        // 运算后缀表达式
+        // let sum = 0
+        const totalarr = []
+        // 修改后统一处理方式
+        endarr.map((c,index) => {
+            if(/\d+/.test(c)){
+                totalarr.push(Number(c))
+            } else {
+                // 按序取出栈顶两个的元素，后取出的做被运算数
+                const b = totalarr.pop()
+                const a = totalarr.pop()
+                // 运算后入栈
+                switch(c) {
+                    case '+': totalarr.push(a + b); break;
+                    case '-': totalarr.push(a - b); break; 
+                    case '×': totalarr.push(a * b); break;
+                    case '÷': totalarr.push(a / b); break;
+                }
+            }
+        })
+
+        // if(index == endarr.length -1){
+        //     sum = totalarr[0] +totalarr[1]
+        // }
+        const sum = totalarr.pop();
+        console.log('计算结果：', sum);
+
+    
+    console.log(sum);
+
+  return sum
+//   const expression = user.prev
+//   const arr = expression.split()
+//  return expression.replace(/^(\d+)([+\-×÷])(\d+)((?:[+\-×÷]\d+)*)$/g,(_,$partA,$partB,$partC,$partD) => {
+//       for(;$partD == '';){
+//            if($partB == '+'){
+//             $partD = Number($partA) + Number($partC) + $partD
+//                 return $partD
+//            }
+//            else if($partB == '-'){
+//             $partD = Number($partA) - Number($partC) + $partD
+//                 return $partD
+//            } 
+//            else if ($partB == '×') {
+//             $partD = Number($partA) * Number($partC) + $partD
+//                 return $partD
+//            }
+//            else if ($partB == '÷') {
+//             $partD = Number($partA) / Number($partC) + $partD
+//                 return $partD
+//            }
+//           }
+//             })
           
   // 只能二元运算
   // if(expression.includes('+')) {
@@ -87,36 +188,36 @@ const equalFn = () => {
 }
 
 // 加法函数
-const addFn = () => {
-  if(user.prev == '') return ''
-  return user.prev.replace(/(\d+)\+(\d+)/, (_, $1, $2) => {
-    return Number($1) + Number($2)
-  })
-}
+// const addFn = () => {
+//   if(user.prev == '') return ''
+//   return user.prev.replace(/(\d+)\+(\d+)/, (_, $1, $2) => {
+//     return Number($1) + Number($2)
+//   })
+// }
 
 // 减法函数
-const subtractFn = () => {
-  if(user.prev == '') return ''
-  return user.prev.replace(/(\d+)-(\d+)/, (_, $1, $2) => {
-    return Number($1) - Number($2)
-  })
-}
+// const subtractFn = () => {
+//   if(user.prev == '') return ''
+//   return user.prev.replace(/(\d+)-(\d+)/, (_, $1, $2) => {
+//     return Number($1) - Number($2)
+//   })
+// }
 
 // 乘法函数
-const chengFn = () => {
-  if(user.prev == '') return ''
-  return user.prev.replace(/(\d+)×(\d+)/, (_, $1, $2) => {
-    return Number($1) * Number($2)
-  })
-}
+// const chengFn = () => {
+//   if(user.prev == '') return ''
+//   return user.prev.replace(/(\d+)×(\d+)/, (_, $1, $2) => {
+//     return Number($1) * Number($2)
+//   })
+// }
 
 // 除法函数
-const chuFn = () => {
-  if(user.prev == '') return ''
-  return user.prev.replace(/(\d+)÷(\d+)/, (_, $1, $2) => {
-    return Number($1) / Number($2)
-  })
-}
+// const chuFn = () => {
+//   if(user.prev == '') return ''
+//   return user.prev.replace(/(\d+)÷(\d+)/, (_, $1, $2) => {
+//     return Number($1) / Number($2)
+//   })
+// }
 
 
 </script>
