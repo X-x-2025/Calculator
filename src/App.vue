@@ -63,6 +63,7 @@ const equalFn = (str1) => {
         }
         const arr = str1.split('')
         console.log(arr);
+        // 拼接数字和小数点
         for(let i = 0;i < arr.length;i++){
             // if(newarr[i].includes([0,1,2,3,4,5,6,7,8,9,'.']) && newarr[i+1].includes([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '.'])){
             //     newarr.splice(i,1,newarr[i]+newarr[i+1])
@@ -94,7 +95,7 @@ const equalFn = (str1) => {
             // 如果a是符号
             else if(a in grade){
                 // 如果符号a的优先级大于栈顶符号的优先级，则入栈，栈空也入栈
-                    if(grade[a] > grade[oparr[oparr.length-1]] || oparr.length == 0){
+                    if(grade[a] >= grade[oparr[oparr.length-1]] || oparr.length == 0){
                         oparr.push(a)
                         // console.log(oparr);
                     }else{
