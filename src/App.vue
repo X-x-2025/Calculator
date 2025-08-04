@@ -95,10 +95,10 @@ const equalFn = (str1) => {
             // 如果a是符号
             else if(a in grade){
                 // 如果符号a的优先级大于栈顶符号的优先级，则入栈，栈空也入栈
-                    if(grade[a] >= grade[oparr[oparr.length-1]] || oparr.length == 0){
+                    if(grade[a] > grade[oparr[oparr.length-1]] || oparr.length == 0){
                         oparr.push(a)
                         // console.log(oparr);
-                    }else{
+                    }else if(grade[a] < grade[oparr[oparr.length-1]]){
                         // 按顺序出栈
                         for(let j=oparr.length-1;j>=0;j--){
                             endarr.push(oparr[j])
@@ -108,7 +108,12 @@ const equalFn = (str1) => {
                         // 入栈
                         oparr.push(a)
                         console.log(endarr);
-            }
+                    }else if(grade[a] = grade[oparr[oparr.length-1]]){
+                        endarr.push(oparr[oparr.length-1])
+                        oparr.splice(oparr.length-1,1)
+                        oparr.push(a)
+
+                    }
         }
          if (index === arr.length - 1) {
                 // 按顺序出栈
