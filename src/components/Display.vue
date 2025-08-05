@@ -4,12 +4,14 @@ import { useCountStore } from '../store/counter.js'
 const user = useCountStore()
 // console.log('Prev:', user.prev);
 
+// const element = document.querySelector('.prev');
+// element.focus()
 
-
+// @keydown="$emit('keyboard-input',$event.key)"
 </script>
 <template>
 <div class="display">
-            <div tabindex="0" @keydown="$emit('keyboard-input',$event.key)" class="prev">{{ user.prev }}</div>
+            <div tabindex="0"  class="prev">{{ user.prev }}</div>
             <div class="current">{{ user.current }}</div>
 </div>
 </template>
@@ -23,7 +25,9 @@ const user = useCountStore()
     width: 100%;            
     height: 200px;
     padding: 20px;          
-    overflow: hidden;       
+    overflow-x: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;       
 }
 .current {
     font-size: 60px;
@@ -32,7 +36,7 @@ const user = useCountStore()
     color: white;
 }
 .prev {
-    height: 40px;
+    height: 60px;
     font-size: 40px;
     opacity: 0.7;
     text-align: right;

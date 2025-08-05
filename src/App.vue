@@ -4,34 +4,55 @@ import Button from './components/Button.vue'
 import Display from './components/Display.vue'
 import { useCountStore } from './store/counter.js'
 
+// const element = document.querySelector('Display');
+// element.focus()
 const user = useCountStore()
 // 键盘
-const keyboardInput = (keyvalue) => {
-  console.log(keyvalue);
-  const list = {
-    'Esc':'AC',
-    'Backspace':'DEL',
-    '*':'×',
-    '/':'÷',
-    '+':'+',
-    "-":'-'
-  }
+// const keyboardInput = (keyvalue) => {
+//   console.log(keyvalue);
+//   const list = {
+//     'Esc':'AC',
+//     'Backspace':'DEL',
+//     '*':'×',
+//     '/':'÷',
+//     '+':'+',
+//     "-":'-'
+//   }
   
-   if(keyvalue == list[keyvalue]){
-    clearFn()
-  }else if(keyvalue == 'DEL'){
-    user.prev = user.prev.slice(0, -1)
-  }else if(['+', '-', '×', '÷'].includes(list[keyvalue])) {
-    const newstr = user.prev + list[keyvalue] 
-  if (/[+\-×÷]{2}$/.test(newstr)) return
-    user.prev = newstr
-  }else if(keyvalue == '='){
-    user.current = equalFn(user.prev) + ' '
-  }else{
-    str = user.prev + keyvalue
-    user.prev = str
-  }
-}
+//    if(keyvalue == list[keyvalue]){
+//     clearFn()
+//   }else if(keyvalue == 'DEL'){
+//     user.prev = user.prev.slice(0, -1)
+//   }else if(['+', '-', '×', '÷'].includes(list[keyvalue])) {
+//     const newstr = user.prev + list[keyvalue] 
+//   if (/[+\-×÷]{2}$/.test(newstr)) return
+//     user.prev = newstr
+//   }else if(keyvalue == '='){
+//     user.current = equalFn(user.prev) + ' '
+//   }else{
+//     str = user.prev + keyvalue
+//     user.prev = str
+//   }
+// }
+// 键盘
+// const getKeyboardData = (data) => {
+//   if(data == 'esc'){
+//     clearFn(str)
+//   }else if(data == 'backspace'){
+//     user.prev = user.prev.slice(0, -1)
+//   }else if(['+', '-', '×', '÷'].includes(data)) {
+//     const newstr = user.prev + data 
+//   if (/[+\-×÷]{2}$/.test(newstr)) return
+//     user.prev = newstr
+//   }else if(value == '='){
+//     user.current = equalFn(user.prev) + ' '
+//   }else{
+//     str = user.prev + data
+//     user.prev = str
+//   }
+
+
+// }
 // 按钮
 const getNumber = (value) => {
   // const reg = /^[0-9]/
@@ -42,7 +63,7 @@ const getNumber = (value) => {
 //  console.log(str);
 
   if(value == 'AC'){
-    cleraFn(str)
+    clearFn(str)
   }else if(value == 'DEL'){
     user.prev = user.prev.slice(0, -1)
   }else if(['+', '-', '×', '÷'].includes(value)) {
@@ -51,7 +72,17 @@ const getNumber = (value) => {
     user.prev = newstr
   }else if(value == '='){
     user.current = equalFn(user.prev) + ' '
-  }else{
+  }else if(value == 'Enter'){
+    user.current = equalFn(user.prev) + ' '
+  }else if(value == 'Backspace'){
+    user.prev = user.prev.slice(0, -1)
+  }else if(value == 'Shift'){
+    user.prev.replace(/Shift/g,'')
+  }else if(value == 'Escape'){
+    clearFn(str)
+  }
+
+  else{
     str = user.prev + value
     user.prev = str
   }
@@ -76,7 +107,7 @@ const getNumber = (value) => {
 
 
 // 归零函数
-const clearFn = () => {
+const clearFn = (str) => {
   user.prev = ''
   user.current = ''
 }
@@ -260,7 +291,9 @@ const equalFn = (str1) => {
 <div class="body">
   <div class="App">
     <Display
-    @keyboard-input="keyboardInput"
+     @keyboard-input="keyboardInput"
+    
+    @keydown="getNumber($event.key)"
 
     
     ></Display>
