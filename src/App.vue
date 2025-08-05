@@ -8,13 +8,21 @@ const user = useCountStore()
 // 键盘
 const keyboardInput = (keyvalue) => {
   console.log(keyvalue);
+  const list = {
+    'Esc':'AC',
+    'Backspace':'DEL',
+    '*':'×',
+    '/':'÷',
+    '+':'+',
+    "-":'-'
+  }
   
-   if(keyvalue == 'AC'){
-    clearFn(str)
+   if(keyvalue == list[keyvalue]){
+    clearFn()
   }else if(keyvalue == 'DEL'){
     user.prev = user.prev.slice(0, -1)
-  }else if(['+', '-', '×', '÷'].includes(keyvalue)) {
-    const newstr = user.prev + keyvalue 
+  }else if(['+', '-', '×', '÷'].includes(list[keyvalue])) {
+    const newstr = user.prev + list[keyvalue] 
   if (/[+\-×÷]{2}$/.test(newstr)) return
     user.prev = newstr
   }else if(keyvalue == '='){
@@ -68,7 +76,7 @@ const getNumber = (value) => {
 
 
 // 归零函数
-const clearFn = (str) => {
+const clearFn = () => {
   user.prev = ''
   user.current = ''
 }
