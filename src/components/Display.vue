@@ -4,10 +4,12 @@ import { useCountStore } from '../store/counter.js'
 const user = useCountStore()
 // console.log('Prev:', user.prev);
 
+
+
 </script>
 <template>
 <div class="display">
-            <div class="prev">{{ user.prev }}</div>
+            <div tabindex="0" @keydown="$emit('keyboard-input',$event.key)" class="prev">{{ user.prev }}</div>
             <div class="current">{{ user.current }}</div>
 </div>
 </template>

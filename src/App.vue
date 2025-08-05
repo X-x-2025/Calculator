@@ -3,7 +3,28 @@
 import Button from './components/Button.vue'
 import Display from './components/Display.vue'
 import { useCountStore } from './store/counter.js'
+
 const user = useCountStore()
+// 键盘
+const keyboardInput = (keyvalue) => {
+  console.log(keyvalue);
+  
+   if(keyvalue == 'AC'){
+    clearFn(str)
+  }else if(keyvalue == 'DEL'){
+    user.prev = user.prev.slice(0, -1)
+  }else if(['+', '-', '×', '÷'].includes(keyvalue)) {
+    const newstr = user.prev + keyvalue 
+  if (/[+\-×÷]{2}$/.test(newstr)) return
+    user.prev = newstr
+  }else if(keyvalue == '='){
+    user.current = equalFn(user.prev) + ' '
+  }else{
+    str = user.prev + keyvalue
+    user.prev = str
+  }
+}
+// 按钮
 const getNumber = (value) => {
   // const reg = /^[0-9]/
   // const reg1 = /\+/
@@ -47,7 +68,7 @@ const getNumber = (value) => {
 
 
 // 归零函数
-const cleraFn = (str) => {
+const clearFn = (str) => {
   user.prev = ''
   user.current = ''
 }
@@ -230,7 +251,11 @@ const equalFn = (str1) => {
 <template>
 <div class="body">
   <div class="App">
-    <Display></Display>
+    <Display
+    @keyboard-input="keyboardInput"
+
+    
+    ></Display>
     <Button
      @input="getNumber"
     ></Button>

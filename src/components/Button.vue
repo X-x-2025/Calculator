@@ -5,27 +5,26 @@
 <template>
 <div class="buttons">
     
-    <button @click="$emit('input', 'AC')" class="is0 type">AC</button>
-    <button @click="$emit('input', 'DEL')" class="del type">DEL</button>
-    <button @click="$emit('input', '÷')" class="chu type">÷</button>
-    <button @click="$emit('input', '7')">7</button>
-    <button @click="$emit('input', '8')">8</button>
-    <button @click="$emit('input', '9')">9</button>
-    <button @click="$emit('input', '×')" class="cheng type">×</button>
-    <button @click="$emit('input', '4')">4</button>
-    <button @click="$emit('input', '5')">5</button>
-    <button @click="$emit('input', '6')">6</button>
-    <button @click="$emit('input', '-')" class="jian type">-</button>
-    <button @click="$emit('input', '1')">1</button>
-    <button @click="$emit('input', '2')">2</button>
-    <button @click="$emit('input', '3')">3</button>
-    <button @click="$emit('input', '+')" class="jia type">+</button>
-    <button @click="$emit('input', '0')">0</button>
-    <button @click="$emit('input', '.')">.</button>
-    <button @click="$emit('input', '=')" class="equal">=</button>
+    <button  @click="$emit('input', 'AC')" class="is0 type">AC</button>
+    <button  @click="$emit('input', 'DEL')" class="del type">DEL</button>
+    <button  @click="$emit('input', '÷')" class="chu type">÷</button>
+    <button  @click="$emit('input', '7')">7</button>
+    <button  @click="$emit('input', '8')">8</button>
+    <button  @click="$emit('input', '9')">9</button>
+    <button  @click="$emit('input', '×')" class="cheng type">×</button>
+    <button  @click="$emit('input', '4')">4</button>
+    <button  @click="$emit('input', '5')">5</button>
+    <button  @click="$emit('input', '6')">6</button>
+    <button  @click="$emit('input', '-')" class="jian type">-</button>
+    <button  @click="$emit('input', '1')">1</button>
+    <button  @click="$emit('input', '2')">2</button>
+    <button  @click="$emit('input', '3')">3</button>
+    <button  @click="$emit('input', '+')" class="jia type">+</button>
+    <button  @click="$emit('input', '0')">0</button>
+    <button  @click="$emit('input', '.')">.</button>
+    <button  @click="$emit('input', '=')" class="equal">=</button>
 </div>
-</template>
-
+</template> 
 
 <style>
 .buttons{
