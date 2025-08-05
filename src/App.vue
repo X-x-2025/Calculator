@@ -80,6 +80,10 @@ const getNumber = (value) => {
     user.prev.replace(/Shift/g,'')
   }else if(value == 'Escape'){
     clearFn(str)
+  }else if(value == '/'){
+    user.prev = user.prev + '÷'
+  }else if(value == '*'){
+    user.prev = user.prev + '×'
   }
 
   else{
@@ -291,8 +295,7 @@ const equalFn = (str1) => {
 <div class="body">
   <div class="App">
     <Display
-     @keyboard-input="keyboardInput"
-    
+    @keyboard-input="keyboardInput"
     @keydown="getNumber($event.key)"
 
     
