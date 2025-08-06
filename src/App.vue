@@ -3,9 +3,17 @@
 import Button from './components/Button.vue'
 import Display from './components/Display.vue'
 import { useCountStore } from './store/counter.js'
+import { onMounted} from 'vue'
+// import { onMounted, ref } from 'vue'
+// ... existing code ...
+// window.focus()
+onMounted(() => {
+  window.addEventListener('keydown', () => {
+    window.focus()
+  })
+  
+})
 
-// const element = document.querySelector('Display');
-// element.focus()
 const user = useCountStore()
 // 键盘
 // const keyboardInput = (keyvalue) => {
@@ -292,21 +300,21 @@ const equalFn = (str1) => {
 
 </script>
 <template>
-<div class="body">
-  <div class="App">
+<div class="body"
+    tabindex="0"
+    @keydown="getNumber($event.key)">
+<!-- @keydown="getNumber" -->
+  <div class="App"
+  >
     <Display
-    @keyboard-input="keyboardInput"
-    @keydown="getNumber($event.key)"
-
-    
+     
     ></Display>
     <Button
      @input="getNumber"
+     
     ></Button>
     
-    
-    <!-- <Display ref="display" /> -->
-    <!-- <Button @input="char => $refs.display.handleInput(char)" > -->
+  
   </div>
 </div>
 
